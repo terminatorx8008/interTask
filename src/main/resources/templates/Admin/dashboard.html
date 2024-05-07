@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="Admin/base::Layout(~{::section})">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<section>
+    <div class="container md-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">All Details</h1>
+                <h2 class="text-center">Customer Details</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Customer I'd</th>
+                        <th>Customer Name</th>
+                        <th>Customer Email</th>
+                        <th>Customer Phone</th>
+                        <th>Customer Address</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="customer : ${customers}">
+                        <td th:text="${customer.customerId}">Customer I'd</td>
+                        <td th:text="${customer.customerName}">Customer Name</td>
+                        <td th:text="${customer.customerEmail}">Customer Email</td>
+                        <td th:text="${customer.customerMobileNumber}">Customer Phone</td>
+                        <td th:text="${customer.customerCity}">Customer Address</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h2 class="text-center">Purchased Orders</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>order I'd</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>MRP</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.orderId}">Product Name</td>
+                        <td th:text="${order.productName}">Product Name</td>
+                        <td th:text="${order.quantity}">Quantity</td>
+                        <td th:text="${order.price}">Price</td>
+                        <td th:text="${order.MRP}">Total Price</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h2 class="text-center">Shipments Details</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Customer I'd</th>
+                        <th>Order I'd</th>
+                        <th>Shipment Address</th>
+                        <th>Shipment City</th>
+                        <th>Shipment Pincode</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="shipment : ${shipments}">
+                        <td th:text="${shipment.id.customerId}">Shipment I'd</td>
+                        <td th:text="${shipment.id.orderId}">Shipment I'd</td>
+                        <td th:text="${shipment.shipmentAddress}">Shipment Address</td>
+                        <td th:text="${shipment.shipmentCity}">Shipment Date</td>
+                        <td th:text="${shipment.shipmentPincode}">Shipment Status</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>
