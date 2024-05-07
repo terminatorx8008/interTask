@@ -35,7 +35,7 @@ public class Admin {
         model.addAttribute("purchasedOrder", purchasedOrder);
         Shipment shipment = new Shipment();
         model.addAttribute("shipment", shipment);
-        return "admin/control-panel";
+        return "control-panel";
     }
     @PostMapping("/add-customer")
     public String addCustomer(@ModelAttribute("customer") Customer customer,Model model){
@@ -49,7 +49,7 @@ public class Admin {
             Message message = new Message("Failed to add customer", "danger");
             model.addAttribute("message", message);
         }
-        return "admin/control-panel";
+        return "control-panel";
     }
     @PostMapping("/add-purchased-order")
     public String addPurchasedOrder(@ModelAttribute("purchasedOrder") PurchasedOrder purchasedOrder,@RequestParam("customerId")int cId, Model model){
@@ -67,7 +67,7 @@ public class Admin {
             Message message = new Message("Failed to add purchased order", "danger");
             model.addAttribute("message", message);
         }
-        return "admin/control-panel";
+        return "control-panel";
     }
     @PostMapping("/add-shipment")
     public String addShipment(@ModelAttribute("shipment") Shipment shipment,@RequestParam("orderId")int oId,@RequestParam("customerId")int cId, Model model){
@@ -83,7 +83,7 @@ public class Admin {
             Message message = new Message("Failed to add shipment", "danger");
             model.addAttribute("message", message);
         }
-        return "admin/control-panel";
+        return "control-panel";
     }
     @RequestMapping("/dashboard")
     public String dashboard(Model model){
@@ -94,12 +94,12 @@ public class Admin {
         model.addAttribute("orders", orders);
         List<Shipment> shipments = shipmentRepo.findAll();
         model.addAttribute("shipments", shipments);
-        return "admin/dashboard";
+        return "dashboard";
     }
     @RequestMapping("/city-order")
     public String cityOrder(Model model){
         model.addAttribute("title", "City Order - Vasu Namdev Flipr Internship Task");
-        return "admin/city-order";
+        return "city-order";
     }
     @PostMapping("/searchCity")
     public String searchCity(@RequestParam("city") String city, Model model){
@@ -111,7 +111,7 @@ public class Admin {
             }
         }
         model.addAttribute("orders",orders);
-        return "admin/city-order";
+        return "city-order";
     }
     @PostMapping("/searchCustomer")
     public String searchCustomer(@RequestParam("city") String city, Model model){
@@ -123,13 +123,13 @@ public class Admin {
             }
         }
         model.addAttribute("orders",orders);
-        return "admin/customer-order";
+        return "customer-order";
     }
     @RequestMapping("/customer-order")
     public String customerOrder(Model model){
         model.addAttribute("title", "Customer Order - Vasu Namdev Flipr Internship Task");
         List<PurchasedOrder> orders = purchasedOrderRepo.findAll();
         model.addAttribute("orders", orders);
-        return "admin/customer-order";
+        return "customer-order";
     }
 }
