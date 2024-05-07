@@ -29,6 +29,11 @@ public class Home {
     @PostMapping("/register")
     public String register(@ModelAttribute("admin") Admin admin, Model model){
         try {
+            if(admin.getAdminEmail().trim().equals("") || admin.getAdminPassword().trim().equals("")){
+                Message message = new Message("Please fill all the fields", "danger");
+                model.addAttribute("message", message);
+                return "index";
+            }
             admin.setRole("ROLE_ADMIN");
             admin.setAdminPassword(bCryptPasswordEncoder.encode(admin.getAdminPassword()));
             adminRepo.save(admin);
