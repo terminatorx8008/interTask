@@ -40,6 +40,11 @@ public class Admin {
     @PostMapping("/add-customer")
     public String addCustomer(@ModelAttribute("customer") Customer customer,Model model){
         try{
+            if(customer.getCustomerName().trim().equals("") || customer.getCustomerEmail().trim().equals("") || customer.getCustomerMobileNumber().trim().equals("") || customer.getCustomerCity().trim().equals("")){
+                Message message = new Message("Please fill all the fields", "danger");
+                model.addAttribute("message", message);
+                return "control-panel";
+            }
             System.out.println(customer);
             this.customerRepo.save(customer);
             Message message = new Message("Customer added successfully", "success");
@@ -54,6 +59,11 @@ public class Admin {
     @PostMapping("/add-purchased-order")
     public String addPurchasedOrder(@ModelAttribute("purchasedOrder") PurchasedOrder purchasedOrder,@RequestParam("customerId")int cId, Model model){
         try{
+            if(purchasedOrder.getCustomer()==null||purchasedOrder.getMRP() == 0 || purchasedOrder.getPrice() == 0 || purchasedOrder.getQuantity() == 0 || purchasedOrder.getProductName().trim().equals("")){
+                Message message = new Message("Please fill all the fields", "danger");
+                model.addAttribute("message", message);
+                return "control-panel";
+            }
             System.out.println(purchasedOrder);
             Customer customer = this.customerRepo.findById(cId).get();
             purchasedOrder.setCustomer(customer);
@@ -72,6 +82,11 @@ public class Admin {
     @PostMapping("/add-shipment")
     public String addShipment(@ModelAttribute("shipment") Shipment shipment,@RequestParam("orderId")int oId,@RequestParam("customerId")int cId, Model model){
         try{
+            if(shipment.getShipmentCity().trim().equals("") || shipment.getShipmentAddress().trim().equals("")|| shipment.getShipmentPincode() == null || shipment.getShipmentCity().trim().equals("")){
+                Message message = new Message("Please fill all the fields", "danger");
+                model.addAttribute("message", message);
+                return "control-panel";
+            }
             System.out.println(shipment);
             ShipmentId shipmentId = new ShipmentId(oId, cId);
             shipment.setId(shipmentId);
